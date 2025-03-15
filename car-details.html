@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Details - CarWeb Malaysia</title>
+    <meta name="description" content="View detailed information about your chosen car.">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+    <!-- Custom CSS -->
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1 0 auto;
+            padding-top: 100px;
+            padding-bottom: 30px;
+        }
+        
+        /* Navbar styles */
+        .navbar {
+            background: linear-gradient(to right, #ffffff, #f8f9fa);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+        }
+        
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2c3e50 !important;
+        }
+        
+        .navbar-brand span {
+            color: #3498db;
+        }
+        
+        .nav-link {
+            color: #2c3e50 !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem !important;
+            margin: 0 0.2rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: #3498db !important;
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+
+        /* Footer styles */
+        footer {
+            background: linear-gradient(to right, #ffffff, #f8f9fa);
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            padding: 2rem 0;
+            flex-shrink: 0;
+        }
+
+        footer h5 {
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+        }
+
+        footer p, footer li {
+            color: #2c3e50;
+        }
+
+        footer a {
+            color: #3498db !important;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #2980b9 !important;
+        }
+
+        /* Car details styles */
+        .gallery-swiper {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .gallery-swiper img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .thumbnail-swiper {
+            height: 100px;
+            box-sizing: border-box;
+            padding: 10px 0;
+        }
+
+        .thumbnail-swiper img {
+            width: 100%;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+        }
+
+        .thumbnail-swiper .swiper-slide-thumb-active img {
+            opacity: 1;
+            border: 2px solid #3498db;
+        }
+
+        .car-info-card {
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 20px;
+            background: white;
+        }
+
+        .feature-badge {
+            font-size: 0.8rem;
+            background-color: #e9ecef;
+            color: #495057;
+            padding: 0.3rem 0.6rem;
+            border-radius: 20px;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .price-section {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .step-indicator {
+            display: flex;
+            margin-bottom: 30px;
+        }
+
+        .step {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+        }
+
+        .step::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: #dee2e6;
+            top: 25px;
+            left: 50%;
+            z-index: 1;
+        }
+
+        .step:last-child::after {
+            display: none;
+        }
+
+        .step-number {
+            width: 30px;
+            height: 30px;
+            background: #fff;
+            border: 2px solid #dee2e6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .step.active .step-number {
+            background: #3498db;
+            border-color: #3498db;
+            color: white;
+        }
+
+        .step.completed .step-number {
+            background: #2ecc71;
+            border-color: #2ecc71;
+            color: white;
+        }
+
+        .booking-form {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .time-slot {
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .time-slot:hover {
+            border-color: #3498db;
+            background: rgba(52, 152, 219, 0.1);
+        }
+
+        .time-slot.selected {
+            border-color: #3498db;
+            background: #3498db;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Car<span>Web</span> Malaysia</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="car.html">Browse Cars</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="loan-calculator.html">Loan Calculator</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <!-- Car Details Section -->
+            <div class="row">
+                <!-- Left Column - Gallery -->
+                <div class="col-lg-8 mb-4">
+                    <!-- Main Gallery -->
+                    <div class="swiper gallery-swiper">
+                        <div class="swiper-wrapper" id="mainGallery">
+                            <!-- Images will be inserted here -->
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                    <!-- Thumbnail Gallery -->
+                    <div class="swiper thumbnail-swiper">
+                        <div class="swiper-wrapper" id="thumbnailGallery">
+                            <!-- Thumbnails will be inserted here -->
+                        </div>
+                    </div>
+
+                    <!-- Car Information -->
+                    <div class="car-info-card mt-4">
+                        <h2 id="carTitle">Loading...</h2>
+                        <div class="price-section">
+                            <h3 class="text-primary mb-0" id="carPrice">RM 0</h3>
+                            <small class="text-muted">Market Value: RM 0</small>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <p><i class="fas fa-calendar me-2"></i>Year: <span id="carYear">-</span></p>
+                                <p><i class="fas fa-tachometer-alt me-2"></i>Mileage: <span id="carMileage">-</span> km</p>
+                                <p><i class="fas fa-cog me-2"></i>Transmission: <span id="carTransmission">-</span></p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><i class="fas fa-gas-pump me-2"></i>Fuel Type: <span id="carFuel">-</span></p>
+                                <p><i class="fas fa-map-marker-alt me-2"></i>Location: <span id="carLocation">-</span></p>
+                                <p><i class="fas fa-car me-2"></i>Condition: <span id="carCondition">-</span></p>
+                            </div>
+                        </div>
+                        <h4>Features</h4>
+                        <div id="carFeatures" class="mb-4">
+                            <!-- Features will be inserted here -->
+                        </div>
+                        <h4>Seller Information</h4>
+                        <div class="seller-info p-3 bg-light rounded">
+                            <p class="mb-2">
+                                <i class="fas fa-user-circle me-2"></i><span id="sellerName">-</span>
+                                <span class="rating ms-2">
+                                    <span id="sellerRating">0</span> <i class="fas fa-star text-warning"></i>
+                                </span>
+                            </p>
+                            <p class="mb-0"><i class="fas fa-tag me-2"></i><span id="sellerType">-</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column - Booking Process -->
+                <div class="col-lg-4">
+                    <div class="booking-form">
+                        <div class="step-indicator mb-4">
+                            <div class="step active" data-step="1">
+                                <div class="step-number">1</div>
+                                <div class="step-title">Book Appointment</div>
+                            </div>
+                            <div class="step" data-step="2">
+                                <div class="step-number">2</div>
+                                <div class="step-title">Details</div>
+                            </div>
+                            <div class="step" data-step="3">
+                                <div class="step-number">3</div>
+                                <div class="step-title">Confirm</div>
+                            </div>
+                        </div>
+
+                        <!-- Step 1: Appointment Booking -->
+                        <div id="step1" class="booking-step active">
+                            <h4 class="mb-4">Select Appointment Date</h4>
+                            <div class="mb-3">
+                                <label class="form-label">Preferred Date</label>
+                                <input type="date" class="form-control" id="appointmentDate" min="">
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label">Available Time Slots</label>
+                                <div class="d-flex flex-wrap" id="timeSlots">
+                                    <div class="time-slot">9:00 AM</div>
+                                    <div class="time-slot">10:00 AM</div>
+                                    <div class="time-slot">11:00 AM</div>
+                                    <div class="time-slot">2:00 PM</div>
+                                    <div class="time-slot">3:00 PM</div>
+                                    <div class="time-slot">4:00 PM</div>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary w-100" onclick="nextStep(2)">Continue</button>
+                        </div>
+
+                        <!-- Step 2: Personal Details -->
+                        <div id="step2" class="booking-step d-none">
+                            <h4 class="mb-4">Your Details</h4>
+                            <div class="mb-3">
+                                <label class="form-label">Full Name</label>
+                                <input type="text" class="form-control" id="fullName" placeholder="Enter your full name">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label">Additional Notes</label>
+                                <textarea class="form-control" id="notes" rows="3" placeholder="Any specific questions or requests?"></textarea>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-outline-primary w-50" onclick="prevStep(1)">Back</button>
+                                <button class="btn btn-primary w-50" onclick="nextStep(3)">Continue</button>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Confirmation -->
+                        <div id="step3" class="booking-step d-none">
+                            <h4 class="mb-4">Confirm Appointment</h4>
+                            <div class="confirmation-details p-3 bg-light rounded mb-4">
+                                <p><strong>Selected Car:</strong> <span id="confirmCar">-</span></p>
+                                <p><strong>Date & Time:</strong> <span id="confirmDateTime">-</span></p>
+                                <p><strong>Name:</strong> <span id="confirmName">-</span></p>
+                                <p><strong>Phone:</strong> <span id="confirmPhone">-</span></p>
+                                <p><strong>Email:</strong> <span id="confirmEmail">-</span></p>
+                                <p><strong>Notes:</strong> <span id="confirmNotes">-</span></p>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-outline-primary w-50" onclick="prevStep(2)">Back</button>
+                                <button class="btn btn-primary w-50" onclick="submitBooking()">Confirm Booking</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>CarWeb Malaysia</h5>
+                    <p>Your trusted platform for buying and selling second-hand cars in Malaysia.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Browse Cars</a></li>
+                        <li><a href="#">Sell Your Car</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contact Info</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-envelope me-2"></i>info@carweb.my</li>
+                        <li><i class="fas fa-phone me-2"></i>+60 3-1234 5678</li>
+                        <li><i class="fas fa-map-marker-alt me-2"></i>Kuala Lumpur, Malaysia</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2024 CarWeb Malaysia. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Success Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Booking Successful!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-check-circle text-success" style="font-size: 48px;"></i>
+                        <h4 class="mt-3">Thank You!</h4>
+                        <p>Your appointment has been successfully booked. We'll contact you shortly to confirm the details.</p>
+                    </div>
+                    <div class="booking-details p-3 bg-light rounded">
+                        <p><strong>Booking Reference:</strong> <span id="bookingReference">-</span></p>
+                        <p><strong>Appointment Date:</strong> <span id="modalDateTime">-</span></p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script type="module">
+        import { cars } from './cars.js';
+
+        // Get car ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const carId = parseInt(urlParams.get('id'));
+        
+        // Find car details
+        const car = cars.find(c => c.id === carId) || cars[0]; // Fallback to first car if ID not found
+
+        // Initialize date input min value to today
+        document.getElementById('appointmentDate').min = new Date().toISOString().split('T')[0];
+
+        // Initialize Swiper with car-specific images
+        const galleryImages = car.images || [car.image];
+
+        // Add fallback images if not enough provided
+        const fallbackImages = [
+            'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80',
+            'https://images.unsplash.com/photo-1580273916550-e323be2ae537?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+        ];
+
+        // Ensure we have at least 3 images for the gallery
+        while (galleryImages.length < 3) {
+            galleryImages.push(fallbackImages[galleryImages.length % fallbackImages.length]);
+        }
+
+        // Populate galleries
+        document.getElementById('mainGallery').innerHTML = galleryImages.map(img => `
+            <div class="swiper-slide">
+                <img src="${img}" alt="Car Image" onerror="this.src='${fallbackImages[0]}'">
+            </div>
+        `).join('');
+
+        document.getElementById('thumbnailGallery').innerHTML = galleryImages.map(img => `
+            <div class="swiper-slide">
+                <img src="${img}" alt="Car Thumbnail" onerror="this.src='${fallbackImages[0]}'">
+            </div>
+        `).join('');
+
+        // Initialize Swiper
+        const thumbnailSwiper = new Swiper('.thumbnail-swiper', {
+            spaceBetween: 10,
+            slidesPerView: 4,
+            freeMode: true,
+            watchSlidesProgress: true,
+        });
+
+        const mainSwiper = new Swiper('.gallery-swiper', {
+            spaceBetween: 10,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            thumbs: {
+                swiper: thumbnailSwiper,
+            },
+        });
+
+        // Populate car details
+        document.getElementById('carTitle').textContent = `${car.year} ${car.brand} ${car.model} ${car.variant}`;
+        document.getElementById('carPrice').textContent = `RM ${car.price.toLocaleString()}`;
+        document.getElementById('carYear').textContent = car.year;
+        document.getElementById('carMileage').textContent = car.mileage.toLocaleString();
+        document.getElementById('carTransmission').textContent = car.transmission;
+        document.getElementById('carFuel').textContent = car.fuelType;
+        document.getElementById('carLocation').textContent = car.location;
+        document.getElementById('carCondition').textContent = car.condition;
+        document.getElementById('sellerName').textContent = car.seller.name;
+        document.getElementById('sellerRating').textContent = car.seller.rating;
+        document.getElementById('sellerType').textContent = car.seller.type;
+
+        // Populate features
+        document.getElementById('carFeatures').innerHTML = car.features.map(feature => 
+            `<span class="feature-badge">${feature}</span>`
+        ).join('');
+
+        // Handle time slot selection
+        document.querySelectorAll('.time-slot').forEach(slot => {
+            slot.addEventListener('click', () => {
+                document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
+                slot.classList.add('selected');
+            });
+        });
+
+        // Booking steps navigation
+        window.nextStep = (step) => {
+            // Validate current step
+            if (step === 2) {
+                const date = document.getElementById('appointmentDate').value;
+                const time = document.querySelector('.time-slot.selected');
+                if (!date || !time) {
+                    alert('Please select both date and time');
+                    return;
+                }
+            } else if (step === 3) {
+                const name = document.getElementById('fullName').value;
+                const phone = document.getElementById('phone').value;
+                const email = document.getElementById('email').value;
+                if (!name || !phone || !email) {
+                    alert('Please fill in all required fields');
+                    return;
+                }
+                
+                // Update confirmation details
+                document.getElementById('confirmCar').textContent = `${car.year} ${car.brand} ${car.model}`;
+                document.getElementById('confirmDateTime').textContent = `${document.getElementById('appointmentDate').value} ${document.querySelector('.time-slot.selected').textContent}`;
+                document.getElementById('confirmName').textContent = name;
+                document.getElementById('confirmPhone').textContent = phone;
+                document.getElementById('confirmEmail').textContent = email;
+                document.getElementById('confirmNotes').textContent = document.getElementById('notes').value || 'None';
+            }
+
+            // Update steps
+            document.querySelectorAll('.booking-step').forEach(s => s.classList.add('d-none'));
+            document.getElementById(`step${step}`).classList.remove('d-none');
+            
+            // Update indicators
+            document.querySelectorAll('.step').forEach(s => {
+                const stepNum = parseInt(s.dataset.step);
+                s.classList.remove('active', 'completed');
+                if (stepNum === step) s.classList.add('active');
+                if (stepNum < step) s.classList.add('completed');
+            });
+        };
+
+        window.prevStep = (step) => {
+            document.querySelectorAll('.booking-step').forEach(s => s.classList.add('d-none'));
+            document.getElementById(`step${step}`).classList.remove('d-none');
+            
+            document.querySelectorAll('.step').forEach(s => {
+                const stepNum = parseInt(s.dataset.step);
+                s.classList.remove('active', 'completed');
+                if (stepNum === step) s.classList.add('active');
+                if (stepNum < step) s.classList.add('completed');
+            });
+        };
+
+        window.submitBooking = () => {
+            // Generate random booking reference
+            const bookingRef = 'BK' + Math.random().toString(36).substr(2, 9).toUpperCase();
+            
+            // Update modal content
+            document.getElementById('bookingReference').textContent = bookingRef;
+            document.getElementById('modalDateTime').textContent = 
+                `${document.getElementById('appointmentDate').value} ${document.querySelector('.time-slot.selected').textContent}`;
+            
+            // Show success modal
+            const modal = new bootstrap.Modal(document.getElementById('successModal'));
+            modal.show();
+            
+            // Reset form after closing modal
+            document.getElementById('successModal').addEventListener('hidden.bs.modal', () => {
+                window.location.href = 'car.html';
+            });
+        };
+    </script>
+</body>
+</html> 

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - CarWeb Malaysia</title>
+    <meta name="description" content="Learn about CarWeb Malaysia's mission, values, and commitment to providing quality second-hand cars.">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding-top: 76px; /* Account for fixed header */
+        }
+
+        main {
+            flex: 1 0 auto;
+        }
+        
+        .navbar {
+            background: linear-gradient(to right, #ffffff, #f8f9fa);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+        }
+        
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2c3e50 !important;
+        }
+        
+        .navbar-brand span {
+            color: #3498db;
+        }
+        
+        .nav-link {
+            color: #2c3e50 !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem !important;
+            margin: 0 0.2rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: #3498db !important;
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+
+        /* Footer styles */
+        footer {
+            background: linear-gradient(to right, #ffffff, #f8f9fa);
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            padding: 2rem 0;
+            flex-shrink: 0;
+        }
+
+        footer h5 {
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+        }
+
+        footer p, footer li {
+            color: #2c3e50;
+        }
+
+        footer a {
+            color: #3498db !important;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #2980b9 !important;
+        }
+
+        footer hr {
+            border-color: rgba(44, 62, 80, 0.1);
+        }
+
+        /* About page styles */
+        .about-header {
+            background: linear-gradient(rgba(52, 152, 219, 0.9), rgba(52, 152, 219, 0.7)), url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 3rem;
+        }
+
+        .value-card {
+            border: none;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .team-member {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 3px solid #3498db;
+        }
+
+        .milestone-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .milestone-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #3498db;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Car<span>Web</span> Malaysia</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="car.html">Browse Cars</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="loan-calculator.html">Loan Calculator</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="about.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- About Header -->
+    <header class="about-header">
+        <div class="container text-center">
+            <h1 class="display-4 mb-4">About CarWeb Malaysia</h1>
+            <p class="lead mb-0">Your Trusted Partner in Finding the Perfect Second-Hand Car</p>
+        </div>
+    </header>
+
+    <main>
+        <!-- Our Story Section -->
+        <section class="py-5">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 mb-4 mb-lg-0">
+                        <h2 class="mb-4">Our Story</h2>
+                        <p>Founded in 2024, CarWeb Malaysia emerged from a vision to revolutionize the second-hand car market in Malaysia. We recognized the challenges faced by both buyers and sellers in the used car market and set out to create a platform that would make the process transparent, efficient, and trustworthy.</p>
+                        <p>Our platform has grown to become one of Malaysia's most trusted online marketplaces for second-hand cars, serving thousands of satisfied customers across the country.</p>
+                    </div>
+                    <div class="col-lg-6">
+                        <img src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="CarWeb Office" class="img-fluid rounded-3 shadow">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Values Section -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <h2 class="text-center mb-5">Our Values</h2>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="value-card card h-100 p-4">
+                            <div class="text-center mb-3">
+                                <i class="fas fa-shield-alt fa-3x text-primary"></i>
+                            </div>
+                            <h4 class="text-center mb-3">Trust & Transparency</h4>
+                            <p class="text-muted mb-0">We believe in complete transparency in every transaction, providing detailed vehicle histories and honest assessments.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="value-card card h-100 p-4">
+                            <div class="text-center mb-3">
+                                <i class="fas fa-handshake fa-3x text-primary"></i>
+                            </div>
+                            <h4 class="text-center mb-3">Customer First</h4>
+                            <p class="text-muted mb-0">Our customers are at the heart of everything we do. We strive to provide exceptional service and support at every step.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="value-card card h-100 p-4">
+                            <div class="text-center mb-3">
+                                <i class="fas fa-chart-line fa-3x text-primary"></i>
+                            </div>
+                            <h4 class="text-center mb-3">Innovation</h4>
+                            <p class="text-muted mb-0">We continuously innovate and improve our platform to provide the best car buying and selling experience.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Milestones Section -->
+        <section class="py-5">
+            <div class="container">
+                <h2 class="text-center mb-5">Our Milestones</h2>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="milestone-card">
+                            <div class="milestone-number">5000+</div>
+                            <div class="text-muted">Cars Listed</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="milestone-card">
+                            <div class="milestone-number">3000+</div>
+                            <div class="text-muted">Happy Customers</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="milestone-card">
+                            <div class="milestone-number">500+</div>
+                            <div class="text-muted">Verified Dealers</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="milestone-card">
+                            <div class="milestone-number">98%</div>
+                            <div class="text-muted">Satisfaction Rate</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+       
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>CarWeb Malaysia</h5>
+                    <p>Your trusted platform for buying and selling second-hand cars in Malaysia.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="car.html">Browse Cars</a></li>
+                        <li><a href="#">Sell Your Car</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contact Info</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-envelope me-2"></i>info@carweb.my</li>
+                        <li><i class="fas fa-phone me-2"></i>+60 3-1234 5678</li>
+                        <li><i class="fas fa-map-marker-alt me-2"></i>Kuala Lumpur, Malaysia</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2024 CarWeb Malaysia. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
