@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚗</text></svg>">
     <title>Car Details - CarWeb Malaysia</title>
     <meta name="description" content="View detailed information about your chosen car.">
     <!-- Bootstrap CSS -->
@@ -227,7 +228,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="index.html">Car<span>Web</span> Malaysia</a>
+            <a class="navbar-brand" href="#"><i class="fas fa-car me-2"></i>Car<span>Web</span> Malaysia</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -524,6 +525,9 @@
         // Populate car details
         document.getElementById('carTitle').textContent = `${car.year} ${car.brand} ${car.model} ${car.variant}`;
         document.getElementById('carPrice').textContent = `RM ${car.price.toLocaleString()}`;
+        // Calculate and display market value (5% more than current price)
+        const marketValue = car.price * 1.05;
+        document.querySelector('.price-section small').textContent = `Market Value: RM ${marketValue.toLocaleString()}`;
         document.getElementById('carYear').textContent = car.year;
         document.getElementById('carMileage').textContent = car.mileage.toLocaleString();
         document.getElementById('carTransmission').textContent = car.transmission;
