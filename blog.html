@@ -14,11 +14,12 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            padding-top: 76px; /* Account for fixed header */
         }
 
         main {
             flex: 1 0 auto;
-            padding-top: 100px;
+            padding-top: 0; /* Remove the extra padding */
             padding-bottom: 30px;
         }
         
@@ -90,9 +91,9 @@
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
-            padding: 5rem 0;
-            margin-bottom: 3rem;
             color: white;
+            padding: 4rem 0;
+            margin-bottom: 3rem;
         }
         
         .blog-card {
