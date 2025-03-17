@@ -137,6 +137,9 @@
                         <a class="nav-link" href="loan-calculator.html">Loan Calculator</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="blog.html">Blog</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="about.html">About Us</a>
                     </li>
                     <li class="nav-item">
@@ -259,6 +262,19 @@
         </div>
     </section>
 
+    <!-- Latest Blog Posts Section -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Latest From Our Blog</h2>
+            <div class="row g-4" id="featuredBlogPosts">
+                <!-- Blog posts will be inserted here -->
+            </div>
+            <div class="text-center mt-4">
+                <a href="blog.html" class="btn btn-outline-primary">View All Articles</a>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer>
         <div class="container">
@@ -296,5 +312,39 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS for Blog Posts -->
+    <script type="module">
+        import { getFeaturedPosts, formatDate } from './blog.js';
+
+        // Function to display featured blog posts
+        const displayFeaturedPosts = () => {
+            const featuredPosts = document.getElementById('featuredBlogPosts');
+            const posts = getFeaturedPosts().slice(0, 3); // Get top 3 featured posts
+            
+            if (posts && posts.length > 0) {
+                featuredPosts.innerHTML = posts.map(post => `
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 shadow-sm">
+                            <img src="${post.coverImage}" class="card-img-top" alt="${post.title}" style="height: 200px; object-fit: cover;">
+                            <div class="card-body d-flex flex-column">
+                                <span class="badge bg-primary mb-2">${post.category}</span>
+                                <h5 class="card-title">${post.title}</h5>
+                                <p class="card-text text-muted small">
+                                    <i class="fas fa-calendar me-1"></i> ${formatDate(post.date)}
+                                </p>
+                                <p class="card-text">${post.excerpt}</p>
+                                <a href="blog-post.html?id=${post.id}" class="btn btn-outline-primary mt-auto">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                featuredPosts.innerHTML = '<div class="col-12 text-center"><p>No blog posts available</p></div>';
+            }
+        };
+
+        // Initialize blog posts
+        displayFeaturedPosts();
+    </script>
 </body>
 </html>

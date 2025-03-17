@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car News & Blog - CarWeb Malaysia</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚗</text></svg>">
+    <meta name="description" content="Stay up-to-date with the latest Malaysian car news, reviews, and automotive guides.">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1 0 auto;
+            padding-top: 100px;
+            padding-bottom: 30px;
+        }
+        
+        /* Navbar styles */
+        .navbar {
+            background: linear-gradient(to right, #ffffff, #f8f9fa);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+        }
+        
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2c3e50 !important;
+        }
+        
+        .navbar-brand span {
+            color: #3498db;
+        }
+        
+        .nav-link {
+            color: #2c3e50 !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem !important;
+            margin: 0 0.2rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: #3498db !important;
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+        
+        /* Footer styles */
+        footer {
+            background: linear-gradient(to right, #ffffff, #f8f9fa);
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            padding: 2rem 0;
+            flex-shrink: 0;
+        }
+
+        footer h5 {
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+        }
+
+        footer p, footer li {
+            color: #2c3e50;
+        }
+
+        footer a {
+            color: #3498db !important;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #2980b9 !important;
+        }
+
+        footer hr {
+            border-color: rgba(44, 62, 80, 0.1);
+        }
+        
+        /* Blog page styles */
+        .blog-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 5rem 0;
+            margin-bottom: 3rem;
+            color: white;
+        }
+        
+        .blog-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .blog-img {
+            height: 220px;
+            object-fit: cover;
+        }
+        
+        .blog-card .card-body {
+            padding: 1.5rem;
+        }
+        
+        .blog-card .card-title {
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+        
+        .blog-meta {
+            font-size: 0.875rem;
+            color: #6c757d;
+            margin-bottom: 1rem;
+        }
+        
+        .blog-meta i {
+            margin-right: 0.5rem;
+        }
+        
+        .blog-category {
+            font-size: 0.875rem;
+            color: white;
+            background-color: #3498db;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        
+        .featured-post {
+            position: relative;
+        }
+        
+        .featured-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ffc107;
+            color: #212529;
+            padding: 0.25rem 0.75rem;
+            border-radius: 3px;
+            font-weight: 500;
+            z-index: 10;
+        }
+        
+        .search-form {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+        
+        .category-card {
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            background-color: #f8f9fa;
+        }
+        
+        .category-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .category-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .category-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .category-list a {
+            color: #2c3e50;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .category-list a:hover {
+            color: #3498db;
+        }
+        
+        .category-count {
+            background-color: #e9ecef;
+            border-radius: 50px;
+            padding: 0.125rem 0.625rem;
+            font-size: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fas fa-car me-2"></i>Car<span>Web</span> Malaysia</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="car.html">Browse Cars</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="loan-calculator.html">Loan Calculator</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="blog.html">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="blog-header text-center">
+        <div class="container">
+            <h1 class="display-4 mb-3">Car News & Blog</h1>
+            <p class="lead mb-0">The latest automotive insights, tips, and trends in Malaysia</p>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="row">
+                <!-- Main Content -->
+                <div class="col-lg-8">
+                    <!-- Featured Post -->
+                    <div id="featuredPost" class="featured-post mb-5">
+                        <!-- Featured post will be inserted here -->
+                    </div>
+                    
+                    <!-- Blog Grid -->
+                    <h2 class="mb-4">Latest Articles</h2>
+                    <div class="row g-4 mb-5" id="blogGrid">
+                        <!-- Blog posts will be inserted here -->
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <nav aria-label="Blog pagination" class="my-5">
+                        <ul class="pagination justify-content-center" id="pagination">
+                            <!-- Pagination will be inserted here -->
+                        </ul>
+                    </nav>
+                </div>
+                
+                <!-- Sidebar -->
+                <div class="col-lg-4">
+                    <!-- Search -->
+                    <div class="search-form">
+                        <h5 class="mb-3">Search Articles</h5>
+                        <form id="searchForm">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="searchInput" placeholder="Search...">
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Categories -->
+                    <div class="category-card">
+                        <h5 class="mb-3">Categories</h5>
+                        <ul class="category-list" id="categoryList">
+                            <!-- Categories will be inserted here -->
+                        </ul>
+                    </div>
+                    
+                    <!-- Featured Posts -->
+                    <div class="category-card">
+                        <h5 class="mb-3">Featured Articles</h5>
+                        <div id="featuredPosts">
+                            <!-- Featured posts will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>CarWeb Malaysia</h5>
+                    <p>Your trusted platform for buying and selling second-hand cars in Malaysia.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Browse Cars</a></li>
+                        <li><a href="#">Sell Your Car</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contact Info</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-envelope me-2"></i>info@carweb.my</li>
+                        <li><i class="fas fa-phone me-2"></i>+60 3-1234 5678</li>
+                        <li><i class="fas fa-map-marker-alt me-2"></i>Kuala Lumpur, Malaysia</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2024 CarWeb Malaysia. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script type="module">
+        import { 
+            blogPosts,
+            filterBlogPosts,
+            sortBlogPosts,
+            getCategories,
+            getFeaturedPosts,
+            formatDate
+        } from './blog.js';
+
+        // DOM Elements
+        const featuredPost = document.getElementById('featuredPost');
+        const blogGrid = document.getElementById('blogGrid');
+        const pagination = document.getElementById('pagination');
+        const categoryList = document.getElementById('categoryList');
+        const featuredPosts = document.getElementById('featuredPosts');
+        const searchForm = document.getElementById('searchForm');
+        const searchInput = document.getElementById('searchInput');
+
+        // Pagination settings
+        const POSTS_PER_PAGE = 6;
+        let currentPage = 1;
+        let filteredPosts = [];
+        let currentSearchTerm = '';
+        let currentCategory = 'all';
+
+        // Create featured post HTML
+        const createFeaturedPostHTML = (post) => {
+            return `
+                <div class="card blog-card">
+                    <span class="featured-badge">Featured</span>
+                    <img src="${post.coverImage}" class="blog-img w-100" alt="${post.title}">
+                    <div class="card-body">
+                        <span class="blog-category">${post.category}</span>
+                        <h3 class="card-title">${post.title}</h3>
+                        <div class="blog-meta mb-3">
+                            <span><i class="fas fa-user"></i>${post.author}</span>
+                            <span class="ms-3"><i class="fas fa-calendar"></i>${formatDate(post.date)}</span>
+                        </div>
+                        <p class="card-text">${post.excerpt}</p>
+                        <a href="blog-post.html?id=${post.id}" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            `;
+        };
+
+        // Create blog post card HTML
+        const createBlogPostHTML = (post) => {
+            return `
+                <div class="col-md-6">
+                    <div class="card blog-card">
+                        ${post.featured ? '<span class="featured-badge">Featured</span>' : ''}
+                        <img src="${post.coverImage}" class="blog-img" alt="${post.title}">
+                        <div class="card-body d-flex flex-column">
+                            <span class="blog-category">${post.category}</span>
+                            <h4 class="card-title">${post.title}</h4>
+                            <div class="blog-meta">
+                                <span><i class="fas fa-user"></i>${post.author}</span>
+                                <span class="ms-3"><i class="fas fa-calendar"></i>${formatDate(post.date)}</span>
+                            </div>
+                            <p class="card-text">${post.excerpt}</p>
+                            <a href="blog-post.html?id=${post.id}" class="btn btn-primary mt-auto">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        };
+
+        // Create featured sidebar post HTML
+        const createSidebarPostHTML = (post) => {
+            return `
+                <div class="mb-3">
+                    <div class="row g-0 align-items-center">
+                        <div class="col-4">
+                            <img src="${post.coverImage}" class="img-fluid rounded" alt="${post.title}">
+                        </div>
+                        <div class="col-8 ps-3">
+                            <h6 class="mb-1"><a href="blog-post.html?id=${post.id}" class="text-decoration-none">${post.title}</a></h6>
+                            <small class="text-muted">${formatDate(post.date)}</small>
+                        </div>
+                    </div>
+                </div>
+            `;
+        };
+
+        // Create pagination controls
+        const createPagination = (totalPages, currentPage) => {
+            let html = '';
+            
+            // Previous button
+            html += `
+                <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+                    <a class="page-link" href="#" data-page="${currentPage - 1}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            `;
+
+            // Page numbers
+            for (let i = 1; i <= totalPages; i++) {
+                html += `
+                    <li class="page-item ${currentPage === i ? 'active' : ''}">
+                        <a class="page-link" href="#" data-page="${i}">${i}</a>
+                    </li>
+                `;
+            }
+
+            // Next button
+            html += `
+                <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+                    <a class="page-link" href="#" data-page="${currentPage + 1}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            `;
+
+            return html;
+        };
+
+        // Update blog display
+        const updateBlogDisplay = () => {
+            // Filter and sort posts
+            filteredPosts = filterBlogPosts({
+                category: currentCategory !== 'all' ? currentCategory : null,
+                search: currentSearchTerm
+            });
+            
+            filteredPosts = sortBlogPosts(filteredPosts, 'date-desc');
+
+            // Get the most recent featured post for the hero section
+            const featuredPosts = filteredPosts.filter(post => post.featured);
+            const heroPost = featuredPosts.length > 0 ? featuredPosts[0] : filteredPosts[0];
+            
+            // Remove the hero post from the grid posts if it's featured
+            const gridPosts = heroPost && heroPost.featured
+                ? filteredPosts.filter(post => post.id !== heroPost.id)
+                : filteredPosts;
+
+            // Calculate pagination
+            const totalPages = Math.ceil(gridPosts.length / POSTS_PER_PAGE);
+            if (currentPage > totalPages && totalPages > 0) {
+                currentPage = 1;
+            }
+            
+            const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
+            const endIndex = Math.min(startIndex + POSTS_PER_PAGE, gridPosts.length);
+            const currentPosts = gridPosts.slice(startIndex, endIndex);
+
+            // Update hero section
+            if (heroPost) {
+                featuredPost.innerHTML = createFeaturedPostHTML(heroPost);
+            } else {
+                featuredPost.innerHTML = '<p class="text-center">No posts found.</p>';
+            }
+            
+            // Update grid
+            if (currentPosts.length > 0) {
+                blogGrid.innerHTML = currentPosts.map(post => createBlogPostHTML(post)).join('');
+            } else {
+                blogGrid.innerHTML = '<div class="col-12"><p class="text-center">No additional posts found.</p></div>';
+            }
+            
+            // Update pagination
+            if (totalPages > 1) {
+                pagination.innerHTML = createPagination(totalPages, currentPage);
+                
+                // Add event listeners to pagination controls
+                pagination.querySelectorAll('.page-link').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const newPage = parseInt(e.target.closest('.page-link').dataset.page);
+                        if (newPage >= 1 && newPage <= totalPages) {
+                            currentPage = newPage;
+                            updateBlogDisplay();
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }
+                    });
+                });
+                pagination.classList.remove('d-none');
+            } else {
+                pagination.classList.add('d-none');
+            }
+        };
+
+        // Update categories sidebar
+        const updateCategories = () => {
+            const categories = getCategories();
+            const categoryCounts = {};
+            
+            // Count posts in each category
+            blogPosts.forEach(post => {
+                if (categoryCounts[post.category]) {
+                    categoryCounts[post.category]++;
+                } else {
+                    categoryCounts[post.category] = 1;
+                }
+            });
+            
+            // Create the "All" category option
+            let html = `
+                <li>
+                    <a href="#" data-category="all" class="${currentCategory === 'all' ? 'text-primary' : ''}">
+                        All Categories
+                        <span class="category-count">${blogPosts.length}</span>
+                    </a>
+                </li>
+            `;
+            
+            // Create category list items
+            categories.forEach(category => {
+                html += `
+                    <li>
+                        <a href="#" data-category="${category.toLowerCase()}" class="${currentCategory === category.toLowerCase() ? 'text-primary' : ''}">
+                            ${category}
+                            <span class="category-count">${categoryCounts[category]}</span>
+                        </a>
+                    </li>
+                `;
+            });
+            
+            categoryList.innerHTML = html;
+            
+            // Add event listeners to category links
+            categoryList.querySelectorAll('[data-category]').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    currentCategory = e.target.closest('[data-category]').dataset.category;
+                    currentPage = 1;
+                    updateBlogDisplay();
+                    updateCategories(); // Re-render categories to highlight the active one
+                });
+            });
+        };
+
+        // Update featured posts sidebar
+        const updateFeaturedSidebar = () => {
+            const featured = getFeaturedPosts().slice(0, 3);
+            
+            if (featured.length > 0) {
+                featuredPosts.innerHTML = featured.map(post => createSidebarPostHTML(post)).join('');
+            } else {
+                featuredPosts.innerHTML = '<p>No featured posts available.</p>';
+            }
+        };
+
+        // Handle search form submission
+        searchForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            currentSearchTerm = searchInput.value.trim();
+            currentPage = 1;
+            updateBlogDisplay();
+        });
+
+        // Initialize the page
+        updateCategories();
+        updateFeaturedSidebar();
+        updateBlogDisplay();
+    </script>
+</body>
+</html> 

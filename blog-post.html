@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Blog Post - CarWeb Malaysia</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚗</text></svg>">
+    <meta name="description" id="pageDescription" content="Read our detailed automotive blog posts on CarWeb Malaysia.">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1 0 auto;
+            padding-top: 100px;
+            padding-bottom: 30px;
+        }
+        
+        /* Navbar styles */
+        .navbar {
+            background: linear-gradient(to right, #ffffff, #f8f9fa);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+        }
+        
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2c3e50 !important;
+        }
+        
+        .navbar-brand span {
+            color: #3498db;
+        }
+        
+        .nav-link {
+            color: #2c3e50 !important;
+            font-weight: 500;
+            padding: 0.5rem 1rem !important;
+            margin: 0 0.2rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: #3498db !important;
+            background-color: rgba(52, 152, 219, 0.1);
+        }
+        
+        /* Footer styles */
+        footer {
+            background: linear-gradient(to right, #ffffff, #f8f9fa);
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            padding: 2rem 0;
+            flex-shrink: 0;
+        }
+
+        footer h5 {
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+        }
+
+        footer p, footer li {
+            color: #2c3e50;
+        }
+
+        footer a {
+            color: #3498db !important;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #2980b9 !important;
+        }
+
+        footer hr {
+            border-color: rgba(44, 62, 80, 0.1);
+        }
+        
+        /* Blog post page styles */
+        .post-header {
+            background-color: #f8f9fa;
+            padding: 3rem 0;
+            margin-bottom: 3rem;
+        }
+        
+        .post-image {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+        
+        .post-meta {
+            margin-bottom: 2rem;
+        }
+        
+        .post-meta span {
+            margin-right: 1.5rem;
+            color: #6c757d;
+        }
+        
+        .post-meta i {
+            margin-right: 0.5rem;
+            color: #3498db;
+        }
+        
+        .post-content {
+            line-height: 1.8;
+        }
+        
+        .post-content h3 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #2c3e50;
+        }
+        
+        .post-content p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .post-content ul, .post-content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+        
+        .post-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .post-category {
+            font-size: 0.875rem;
+            color: white;
+            background-color: #3498db;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        
+        .post-tags {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid #dee2e6;
+        }
+        
+        .tag-badge {
+            background-color: #e9ecef;
+            color: #495057;
+            padding: 0.375rem 0.75rem;
+            border-radius: 50px;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+            font-size: 0.875rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .tag-badge:hover {
+            background-color: #3498db;
+            color: white;
+        }
+        
+        .related-posts {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid #dee2e6;
+        }
+        
+        .related-post-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            border: none;
+        }
+        
+        .related-post-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .related-post-img {
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        .not-found {
+            text-align: center;
+            padding: 5rem 0;
+        }
+        
+        .not-found h2 {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+        }
+        
+        .sidebar-card {
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            background-color: #f8f9fa;
+        }
+        
+        .category-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .category-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .category-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .category-list a {
+            color: #2c3e50;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .category-list a:hover {
+            color: #3498db;
+        }
+        
+        .featured-post-sidebar {
+            margin-bottom: 1.5rem;
+        }
+        
+        .featured-post-sidebar:last-child {
+            margin-bottom: 0;
+        }
+        
+        .featured-post-sidebar img {
+            border-radius: 5px;
+        }
+        
+        .featured-post-sidebar h6 {
+            margin-top: 0.5rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .featured-post-sidebar h6 a {
+            color: #2c3e50;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .featured-post-sidebar h6 a:hover {
+            color: #3498db;
+        }
+        
+        .featured-post-sidebar small {
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#"><i class="fas fa-car me-2"></i>Car<span>Web</span> Malaysia</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="car.html">Browse Cars</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="loan-calculator.html">Loan Calculator</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="blog.html">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <div class="row">
+                <!-- Main Content -->
+                <div class="col-lg-8">
+                    <!-- Post Content -->
+                    <div id="postContent">
+                        <!-- Post content will be inserted here -->
+                    </div>
+                    
+                    <!-- Related Posts -->
+                    <div class="related-posts">
+                        <h3 class="mb-4">Related Articles</h3>
+                        <div class="row g-4" id="relatedPosts">
+                            <!-- Related posts will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sidebar -->
+                <div class="col-lg-4">
+                    <!-- Categories -->
+                    <div class="sidebar-card">
+                        <h5 class="mb-3">Categories</h5>
+                        <ul class="category-list" id="categoryList">
+                            <!-- Categories will be inserted here -->
+                        </ul>
+                    </div>
+                    
+                    <!-- Featured Posts -->
+                    <div class="sidebar-card">
+                        <h5 class="mb-3">Featured Articles</h5>
+                        <div id="featuredPosts">
+                            <!-- Featured posts will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>CarWeb Malaysia</h5>
+                    <p>Your trusted platform for buying and selling second-hand cars in Malaysia.</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Browse Cars</a></li>
+                        <li><a href="#">Sell Your Car</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Contact Info</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-envelope me-2"></i>info@carweb.my</li>
+                        <li><i class="fas fa-phone me-2"></i>+60 3-1234 5678</li>
+                        <li><i class="fas fa-map-marker-alt me-2"></i>Kuala Lumpur, Malaysia</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2024 CarWeb Malaysia. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script type="module">
+        import { 
+            getBlogPostById,
+            getRelatedPosts,
+            getCategories,
+            getFeaturedPosts,
+            formatDate
+        } from './blog.js';
+
+        // DOM Elements
+        const postContent = document.getElementById('postContent');
+        const relatedPosts = document.getElementById('relatedPosts');
+        const categoryList = document.getElementById('categoryList');
+        const featuredPosts = document.getElementById('featuredPosts');
+        const pageTitle = document.getElementById('pageTitle');
+        const pageDescription = document.getElementById('pageDescription');
+
+        // Get post ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const postId = parseInt(urlParams.get('id'));
+        
+        // Create post content HTML
+        const createPostContentHTML = (post) => {
+            return `
+                <article>
+                    <header class="post-header">
+                        <div class="container">
+                            <span class="post-category">${post.category}</span>
+                            <h1 class="mb-4">${post.title}</h1>
+                            <div class="post-meta">
+                                <span><i class="fas fa-user"></i>${post.author}</span>
+                                <span><i class="fas fa-calendar"></i>${formatDate(post.date)}</span>
+                                <span><i class="fas fa-folder"></i>${post.category}</span>
+                            </div>
+                        </div>
+                    </header>
+                    
+                    <img src="${post.coverImage}" class="post-image" alt="${post.title}">
+                    
+                    <div class="post-content">
+                        ${post.content}
+                    </div>
+                    
+                    <div class="post-tags">
+                        <h5 class="mb-3">Tags</h5>
+                        ${post.tags.map(tag => `<a href="blog.html?tag=${tag}" class="tag-badge">${tag}</a>`).join('')}
+                    </div>
+                </article>
+            `;
+        };
+
+        // Create related post card HTML
+        const createRelatedPostHTML = (post) => {
+            return `
+                <div class="col-md-4">
+                    <div class="card related-post-card">
+                        <img src="${post.coverImage}" class="related-post-img" alt="${post.title}">
+                        <div class="card-body">
+                            <h5 class="card-title">${post.title}</h5>
+                            <p class="text-muted small">${formatDate(post.date)}</p>
+                            <a href="blog-post.html?id=${post.id}" class="btn btn-outline-primary btn-sm">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        };
+
+        // Create featured sidebar post HTML
+        const createSidebarPostHTML = (post) => {
+            return `
+                <div class="featured-post-sidebar">
+                    <div class="row g-0">
+                        <div class="col-4">
+                            <img src="${post.coverImage}" class="img-fluid" alt="${post.title}">
+                        </div>
+                        <div class="col-8 ps-3">
+                            <h6><a href="blog-post.html?id=${post.id}">${post.title}</a></h6>
+                            <small>${formatDate(post.date)}</small>
+                        </div>
+                    </div>
+                </div>
+            `;
+        };
+
+        // Display post not found message
+        const displayNotFound = () => {
+            postContent.innerHTML = `
+                <div class="not-found">
+                    <h2>Post Not Found</h2>
+                    <p>The blog post you are looking for does not exist or has been removed.</p>
+                    <a href="blog.html" class="btn btn-primary">Back to Blog</a>
+                </div>
+            `;
+            relatedPosts.parentElement.style.display = 'none';
+        };
+
+        // Update categories sidebar
+        const updateCategories = () => {
+            const categories = getCategories();
+            
+            let html = `
+                <li>
+                    <a href="blog.html">All Categories</a>
+                </li>
+            `;
+            
+            categories.forEach(category => {
+                html += `
+                    <li>
+                        <a href="blog.html?category=${category.toLowerCase()}">${category}</a>
+                    </li>
+                `;
+            });
+            
+            categoryList.innerHTML = html;
+        };
+
+        // Update featured posts sidebar
+        const updateFeaturedSidebar = () => {
+            const featured = getFeaturedPosts().slice(0, 3);
+            
+            if (featured.length > 0) {
+                featuredPosts.innerHTML = featured.map(post => createSidebarPostHTML(post)).join('');
+            } else {
+                featuredPosts.innerHTML = '<p>No featured posts available.</p>';
+            }
+        };
+
+        // Main function to display the post
+        const displayPost = () => {
+            const post = getBlogPostById(postId);
+            
+            if (!post) {
+                displayNotFound();
+                return;
+            }
+            
+            // Update page title and meta description
+            pageTitle.textContent = `${post.title} - CarWeb Malaysia`;
+            pageDescription.content = post.excerpt;
+            
+            // Display post content
+            postContent.innerHTML = createPostContentHTML(post);
+            
+            // Display related posts
+            const related = getRelatedPosts(post.id);
+            
+            if (related.length > 0) {
+                relatedPosts.innerHTML = related.map(post => createRelatedPostHTML(post)).join('');
+            } else {
+                relatedPosts.innerHTML = '<div class="col-12"><p>No related posts available.</p></div>';
+            }
+        };
+
+        // Initialize the page
+        updateCategories();
+        updateFeaturedSidebar();
+        displayPost();
+    </script>
+</body>
+</html> 
