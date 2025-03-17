@@ -393,19 +393,19 @@ const cars = [
     {
         id: 16,
         brand: "Mercedes-Benz",
-        model: "C200",
+        model: "C300",
         year: 2022,
         variant: "AMG Line",
-        price: 288800,
+        price: 275000,
         mileage: 15000,
         transmission: "Automatic",
         fuelType: "Petrol",
         location: "Petaling Jaya",
-        image: "img/c200.webp",
+        image: "img/c300.webp",
         images: [
-            "img/c200.webp",
-            "img/c2001.webp",
-            "img/c2002.webp"
+            "img/c300.webp",
+            "img/c3001.webp",
+            "img/c3002.webp"
         ],
         features: ["AMG Line", "11.9-inch Display", "Burmester 3D Sound", "Driver Assistance Package"],
         condition: "Excellent",
