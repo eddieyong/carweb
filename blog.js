@@ -35,7 +35,7 @@ const blogPosts = [
         date: "March 15, 2023",
         category: "Market Trends",
         tags: ["market trends", "hybrid cars", "SUVs", "used cars", "Malaysia"],
-        coverImage: "blog-assets/images/market-trends.jpg",
+        coverImage: "https://images.unsplash.com/photo-1493238792000-8113da705763?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
         featured: true
     },
     {
@@ -87,7 +87,7 @@ const blogPosts = [
         date: "February 28, 2023",
         category: "Buying Guide",
         tags: ["buying guide", "used cars", "reliable cars", "budget", "Malaysia"],
-        coverImage: "blog-assets/images/reliable-cars.jpg",
+        coverImage: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
         featured: true
     },
     {
@@ -166,7 +166,7 @@ const blogPosts = [
         date: "February 15, 2023",
         category: "Financing",
         tags: ["car loans", "financing", "interest rates", "Malaysia", "personal finance"],
-        coverImage: "blog-assets/images/car-loan.jpg",
+        coverImage: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
         featured: false
     },
     {
@@ -285,7 +285,7 @@ const blogPosts = [
         date: "January 25, 2023",
         category: "Maintenance",
         tags: ["car maintenance", "Malaysia", "tropical climate", "car care", "tips"],
-        coverImage: "blog-assets/images/car-maintenance.jpg",
+        coverImage: "https://images.unsplash.com/photo-1487754180451-c456f719a1fc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
         featured: false
     },
     {
@@ -399,7 +399,7 @@ const blogPosts = [
         date: "January 10, 2023",
         category: "Industry Trends",
         tags: ["electric vehicles", "EV", "Malaysia", "sustainable transportation", "future mobility"],
-        coverImage: "blog-assets/images/electric-vehicles.jpg",
+        coverImage: "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
         featured: true
     }
 ];

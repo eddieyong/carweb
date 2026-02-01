@@ -6,6 +6,12 @@
     <title>Car News & Blog - CarWeb Malaysia</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚗</text></svg>">
     <meta name="description" content="Stay up-to-date with the latest Malaysian car news, reviews, and automotive guides.">
+    <meta name="keywords" content="car blog, automotive news malaysia, car reviews, buying guide">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://eddieyong.github.io/carweb/blog.html">
+    <meta property="og:title" content="Car News & Blog - CarWeb Malaysia">
+    <meta property="og:description" content="Stay up-to-date with the latest Malaysian car news, reviews, and automotive guides.">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -84,6 +90,31 @@
 
         footer hr {
             border-color: rgba(44, 62, 80, 0.1);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #3498db !important;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            background: #3498db;
+            color: white !important;
+            transform: translateY(-3px);
         }
         
         /* Blog page styles */
@@ -211,7 +242,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#"><i class="fas fa-car me-2"></i>Car<span>Web</span> Malaysia</a>
+            <a class="navbar-brand" href="index.html"><i class="fas fa-car me-2"></i>Car<span>Web</span> Malaysia</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -311,22 +342,29 @@
     <footer>
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
-                    <h5>CarWeb Malaysia</h5>
+                <div class="col-md-4 mb-4 mb-md-0">
+                    <h5><i class="fas fa-car me-2"></i>CarWeb Malaysia</h5>
                     <p>Your trusted platform for buying and selling second-hand cars in Malaysia.</p>
+                    <div class="social-links">
+                        <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://github.com/eddieyong/carweb" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 mb-4 mb-md-0">
                     <h5>Quick Links</h5>
                     <ul class="list-unstyled">
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Browse Cars</a></li>
-                        <li><a href="#">Sell Your Car</a></li>
-                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="car.html">Browse Cars</a></li>
+                        <li><a href="loan-calculator.html">Loan Calculator</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">
                     <h5>Contact Info</h5>
                     <ul class="list-unstyled">
+                        <li><i class="fas fa-globe me-2"></i><a href="https://eddieyong.github.io/carweb" target="_blank">eddieyong.github.io/carweb</a></li>
                         <li><i class="fas fa-envelope me-2"></i>info@carweb.my</li>
                         <li><i class="fas fa-phone me-2"></i>+60 3-1234 5678</li>
                         <li><i class="fas fa-map-marker-alt me-2"></i>Kuala Lumpur, Malaysia</li>
@@ -335,7 +373,7 @@
             </div>
             <hr class="my-4">
             <div class="text-center">
-                <p class="mb-0">&copy; 2024 CarWeb Malaysia. All rights reserved.</p>
+                <p class="mb-0">&copy; 2025 CarWeb Malaysia. All rights reserved.</p>
             </div>
         </div>
     </footer>
